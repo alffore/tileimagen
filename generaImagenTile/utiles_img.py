@@ -1,6 +1,5 @@
 import request
-import opencv
-
+import cv2
 
 
 def analizaHisto(imagen):
