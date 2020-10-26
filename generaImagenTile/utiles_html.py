@@ -1,0 +1,5 @@
+
+
+def generaImagen(imagen):
+
+    return
