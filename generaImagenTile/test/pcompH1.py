@@ -1,6 +1,7 @@
 """
 Pruebas de comparacion de histogramas de imagenes
 https://www.pyimagesearch.com/2014/07/14/3-ways-compare-histograms-using-opencv-python/
+https://docs.opencv.org/3.4/d8/dc8/tutorial_histogram_comparison.html
 """
 # import the necessary packages
 
@@ -44,6 +45,7 @@ OPENCV_METHODS = (
     ("Chi-Squared", cv2.HISTCMP_CHISQR),
     ("Intersection", cv2.HISTCMP_INTERSECT),
     ("Hellinger", cv2.HISTCMP_BHATTACHARYYA))
+
 # loop over the comparison methods
 for (methodName, method) in OPENCV_METHODS:
     # initialize the results dictionary and the sort
