@@ -15,6 +15,8 @@ AAFR <alffore@gmail.com>
 import multiprocessing
 import time
 import sys
+import argparse
+import glob
 
 import utiles_bd as ubd
 import utiles_img as uimg
@@ -26,17 +28,17 @@ tamxPx = 0
 tamyPx = 0
 
 aHistogramas = []
-aimagenes = []
+aImagenes = []
 
 
 def procesaImagen(hilo):
-    global aimagenes
+    global aImagenes
 
-    for index in range(hilo, len(aimagenes), tHILOS):
+    for index in range(hilo, len(aImagenes), tHILOS):
         # img = uimg.recuperaImagenSIC(aimagenes[index][0])
         # datosimg = uimg.analizaHisto(img)
         # datosimg.append(comparaHistogramas(datosimg))
-        print(hilo, index, aimagenes[index])
+        print(hilo, index, aImagenes[index])
     return
 
 
@@ -46,13 +48,22 @@ def comparaHistogramas(dimg):
 
 
 if __name__ == '__main__':
+    start = time.perf_counter()
+    ap = argparse.ArgumentParser()
+    ap.add_argument("-i", "--imagen", required=True, help='Imagen origen')
+    ap.add_argument("-cx", "--cortex", required=True, help='partes X')
+    ap.add_argument("-cy", "--cortey", required=True, help='partes Y')
+    ap.add_argument("-o", "--output", required=True, help='Archivo de salida del html')
+    ap.add_argument("-c", "--cachedir", required=False, help="Ruta de path del cache",default='./cache/')
+
+    args = vars(ap.parse_args())
 
     # archivo_target = ''
     # uimg.cargaImagen(archivo_target)
 
     proc_list = []
 
-    aimagenes = ubd.recuperaTodasImgSIC()
+    aImagenes = ubd.recuperaTodasImgSIC()
 
     with multiprocessing.Manager() as manager:
 
@@ -63,3 +74,5 @@ if __name__ == '__main__':
 
         for p in proc_list:
             p.join()
+
+    print(f'Termino en {round(time.perf_counter() - start, 2)} segundos')

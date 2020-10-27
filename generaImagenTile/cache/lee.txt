@@ -1,0 +1,1 @@
+Este es el directorio de cache con caracteristicas en diccionario por imagen para multiples procesos

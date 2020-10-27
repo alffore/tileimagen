@@ -3,7 +3,6 @@ Pruebas de comparacion de histogramas de imagenes
 https://www.pyimagesearch.com/2014/07/14/3-ways-compare-histograms-using-opencv-python/
 https://docs.opencv.org/3.4/d8/dc8/tutorial_histogram_comparison.html
 """
-# import the necessary packages
 
 import matplotlib.pyplot as plt
 

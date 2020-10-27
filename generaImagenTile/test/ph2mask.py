@@ -6,7 +6,7 @@ import cv2
 import numpy as np
 from matplotlib import pyplot as plt
 
-img = cv2.imread('imagenes/90665.jpeg', 0)
+img = cv2.imread('imagenes/90652.jpeg', 0)
 
 # create a mask
 mask = np.zeros(img.shape[:2], np.uint8)
