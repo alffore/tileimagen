@@ -58,7 +58,7 @@ for (methodName, method) in OPENCV_METHODS:
     for (k, hist) in index.items():
         # compute the distance between the two histograms
         # using the method and update the results dictionary
-        d = cv2.compareHist(index["90648.jpeg"], hist, method)
+        d = cv2.compareHist(index["90661.jpeg"], hist, method)
         results[k] = d
     # sort the results
     results = sorted([(v, k) for (k, v) in results.items()], reverse=reverse)
@@ -66,7 +66,7 @@ for (methodName, method) in OPENCV_METHODS:
     # show the query image
     fig = plt.figure("Query")
     ax = fig.add_subplot(1, 1, 1)
-    ax.imshow(images["90648.jpeg"])
+    ax.imshow(images["90661.jpeg"])
     plt.axis("off")
     # initialize the results figure
     fig = plt.figure("Results: %s" % methodName)

@@ -127,8 +127,6 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
-generaImagenTile/test/imagenes/90648.jpeg
-generaImagenTile/test/imagenes/90649.jpeg
-generaImagenTile/test/imagenes/90651.jpeg
-generaImagenTile/test/imagenes/90652.jpeg
-generaImagenTile/test/imagenes/90648.jpeg
+
+
+generaImagenTile/test/imagenes/*

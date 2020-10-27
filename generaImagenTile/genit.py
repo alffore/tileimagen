@@ -32,11 +32,11 @@ aimagenes = []
 def procesaImagen(hilo):
     global aimagenes
 
-    for index in range(i, len(aimagenes), tHILOS):
-        img = uimg.recuperaImagenSIC(aimagenes[index][0])
-        datosimg = uimg.analizaHisto(img)
-        datosimg.append(comparaHistogramas(datosimg))
-
+    for index in range(hilo, len(aimagenes), tHILOS):
+        # img = uimg.recuperaImagenSIC(aimagenes[index][0])
+        # datosimg = uimg.analizaHisto(img)
+        # datosimg.append(comparaHistogramas(datosimg))
+        print(hilo, index, aimagenes[index])
     return
 
 
@@ -47,8 +47,8 @@ def comparaHistogramas(dimg):
 
 if __name__ == '__main__':
 
-    archivo_target = ''
-    uimg.cargaImagen(archivo_target)
+    # archivo_target = ''
+    # uimg.cargaImagen(archivo_target)
 
     proc_list = []
 
@@ -57,7 +57,7 @@ if __name__ == '__main__':
     with multiprocessing.Manager() as manager:
 
         for i in range(tHILOS):
-            p = multiprocessing.Process(target=procesaImagen, args=(i))
+            p = multiprocessing.Process(target=procesaImagen, args=(i,))
             p.start()
             proc_list.append(p)
 
