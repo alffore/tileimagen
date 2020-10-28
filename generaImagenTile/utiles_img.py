@@ -9,9 +9,9 @@ def analizaHisto(imagen):
     :param imagen:
     :return:
     """
-    histograma = []
-
-    return histograma
+    hist = cv2.calcHist([imagen], [0, 1, 2], None, [8, 8, 8], [0, 256, 0, 256, 0, 256])
+    hist = cv2.normalize(hist, hist).flatten()
+    return hist
 
 
 def recuperaImagenSIC(id):
@@ -20,9 +20,15 @@ def recuperaImagenSIC(id):
     :param id:
     :return:
     """
-    imagen = []
+    url = f'http://sic.gob.mx/images/{id}'
+    print(url)
+    response = requests.get(url)
+    if response.status_code == 200:
+        file = open(f'/tmp/{id}', "wb")
+        file.write(response.content)
+        file.close()
 
-    return imagen
+    return cv2.cvtColor(cv2.imread(f'/tmp/{id}'), cv2.COLOR_BGR2RGB)
 
 
 def ajusteTam(imagen, tamx, tamy):
@@ -53,6 +59,5 @@ def cargaImagen(archivo):
     :param archivo:
     :return:
     """
-    imagen = None
-
-    return imagen
+    imagen = cv2.imread(archivo)
+    return cv2.cvtColor(imagen, cv2.COLOR_BGR2RGB)

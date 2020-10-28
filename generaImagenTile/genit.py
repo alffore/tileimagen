@@ -17,10 +17,12 @@ import time
 import sys
 import argparse
 import glob
+import pickle
 
 import utiles_bd as ubd
 import utiles_img as uimg
-import utiles_html
+import utiles_html as uhtml
+import utiles_archivos as uarch
 
 tHILOS = 4
 
@@ -33,11 +35,16 @@ aImagenes = []
 
 def procesaImagen(hilo):
     global aImagenes
+    global tHILOS
+
+    datosimg = {}
 
     for index in range(hilo, len(aImagenes), tHILOS):
-        # img = uimg.recuperaImagenSIC(aimagenes[index][0])
-        # datosimg = uimg.analizaHisto(img)
-        # datosimg.append(comparaHistogramas(datosimg))
+        img = uimg.recuperaImagenSIC(aImagenes[index][0])
+        datosimg['id'] = aImagenes[index][0]
+        datosimg['histo'] = uimg.analizaHisto(img)
+        datosimg['shape'] = img.shape
+        uarch.guardaDI(datosimg)
         print(hilo, index, aImagenes[index])
     return
 
@@ -54,16 +61,17 @@ if __name__ == '__main__':
     ap.add_argument("-cx", "--cortex", required=True, help='partes X')
     ap.add_argument("-cy", "--cortey", required=True, help='partes Y')
     ap.add_argument("-o", "--output", required=True, help='Archivo de salida del html')
-    ap.add_argument("-c", "--cachedir", required=False, help="Ruta de path del cache",default='./cache/')
+    ap.add_argument("-c", "--cachedir", required=False, help="Ruta de path del cache", default='./cache/')
 
     args = vars(ap.parse_args())
 
-    # archivo_target = ''
-    # uimg.cargaImagen(archivo_target)
+    archivo_target = args['imagen']
+    uimg.cargaImagen(archivo_target)
 
     proc_list = []
 
     aImagenes = ubd.recuperaTodasImgSIC()
+    print(f'total imagenes {len(aImagenes)}')
 
     with multiprocessing.Manager() as manager:
 
