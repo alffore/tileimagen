@@ -18,6 +18,7 @@ import sys
 import argparse
 import glob
 import pickle
+import pathlib
 
 import utiles_bd as ubd
 import utiles_img as uimg
@@ -34,18 +35,29 @@ aImagenes = []
 
 
 def procesaImagen(hilo):
+    """
+
+    :param hilo:
+    :return:
+    """
     global aImagenes
     global tHILOS
 
     datosimg = {}
 
     for index in range(hilo, len(aImagenes), tHILOS):
-        img = uimg.recuperaImagenSIC(aImagenes[index][0])
-        datosimg['id'] = aImagenes[index][0]
-        datosimg['histo'] = uimg.analizaHisto(img)
-        datosimg['shape'] = img.shape
-        uarch.guardaDI(datosimg)
-        print(hilo, index, aImagenes[index])
+        tid = aImagenes[index][0]
+        archivo_pk = pathlib.Path(f'./cache/{tid}.pk')
+        if archivo_pk.exists():
+            return None
+
+        img = uimg.recuperaImagenSIC(tid)
+        if img is not None:
+            datosimg['id'] = aImagenes[index][0]
+            datosimg['histo'] = uimg.analizaHisto(img)
+            datosimg['shape'] = img.shape
+            uarch.guardaDI(datosimg)
+            print(hilo, index, aImagenes[index])
     return
 
 

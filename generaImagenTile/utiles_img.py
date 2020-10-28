@@ -16,19 +16,19 @@ def analizaHisto(imagen):
 
 def recuperaImagenSIC(id):
     """
-
+    Función que recupera una imagen del SIC via su URL en Internet
     :param id:
     :return:
     """
     url = f'http://sic.gob.mx/images/{id}'
-    print(url)
+    # print(url)
     response = requests.get(url)
     if response.status_code == 200:
         file = open(f'/tmp/{id}', "wb")
         file.write(response.content)
         file.close()
-
-    return cv2.cvtColor(cv2.imread(f'/tmp/{id}'), cv2.COLOR_BGR2RGB)
+        return cv2.cvtColor(cv2.imread(f'/tmp/{id}'), cv2.COLOR_BGR2RGB)
+    return None
 
 
 def ajusteTam(imagen, tamx, tamy):
