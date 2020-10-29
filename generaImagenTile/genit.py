@@ -17,7 +17,6 @@ import time
 import sys
 import argparse
 import glob
-import pickle
 import pathlib
 
 import utiles_bd as ubd

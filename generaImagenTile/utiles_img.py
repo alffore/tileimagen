@@ -21,7 +21,7 @@ def recuperaImagenSIC(id):
     :return:
     """
     url = f'http://sic.gob.mx/images/{id}'
-    # print(url)
+    print(url)
     response = requests.get(url)
     if response.status_code == 200:
         file = open(f'/tmp/{id}', "wb")
